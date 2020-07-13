@@ -5,12 +5,11 @@ orbs:
 
 jobs:
   test:
-    docker:
-      - image: circleci/node:4.8.1
+    machine:
+      docker_layer_caching: true
+      image: ubuntu-1604:201903-01
     steps:
       - checkout
-      - setup_remote_docker:
-          docker_layer_caching: true
       - run: make test-image deps
       - node/install-packages
       - run: make test
