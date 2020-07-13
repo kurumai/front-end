@@ -11,7 +11,8 @@ jobs:
     steps:
       - checkout
       - run: make test-image deps
-      - node/install-packages
+      #- node/install-packages
+      - run: npm install
       - run: make test
 
 workflows:
