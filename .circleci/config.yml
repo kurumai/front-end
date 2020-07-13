@@ -4,7 +4,7 @@ orbs:
   node: circleci/node@3.0.1
 
 jobs:
-  build:
+  test:
     executor:
       name: node/default
       tag: '4.8.1'
@@ -13,3 +13,8 @@ jobs:
       - make test-image deps
       - node/install-packages
       - make test
+
+workflows:
+  test_and_deploy:
+    jobs:
+      - test
