@@ -8,6 +8,11 @@ jobs:
     machine:
       docker_layer_caching: true
       image: ubuntu-1604:201903-01
+    environment:
+      GROUP: weaveworksdemos
+      COMMIT: ${CIRCLE_SHA1}
+      TAG: ${CIRCLE_TAG}
+      REPO: front-end
     steps:
       - checkout
       - run: make test-image deps
