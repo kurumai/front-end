@@ -10,9 +10,9 @@ jobs:
       tag: '4.8.1'
     steps:
       - checkout
-      - make test-image deps
+      - run: make test-image deps
       - node/install-packages
-      - make test
+      - run: make test
 
 workflows:
   test_and_deploy:
