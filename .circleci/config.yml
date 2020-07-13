@@ -9,7 +9,7 @@ jobs:
       - image: circleci/node:4.8.1
     steps:
       - checkout
-      - setup_remote-docker:
+      - setup_remote_docker:
           docker_layer_caching: true
       - run: make test-image deps
       - node/install-packages
