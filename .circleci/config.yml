@@ -1,0 +1,15 @@
+version: 2.1
+
+orbs:
+  node: 'circleci/node:3.0.1'
+
+jobs:
+  build:
+    executor:
+      name: node/default
+      tag: '4.8.1'
+    steps:
+      - checkout
+      - make test-image deps
+      - node/install-packages
+      - make test
