@@ -1,9 +1,9 @@
-FROM node:4-alpine
+FROM node:10.21-buster
 
-RUN apk update && apk add make
+RUN apt-get update && apt-get install -y make
 
-RUN npm install -g phantomjs-prebuilt
-RUN npm install -g casperjs
+RUN npm install phantomjs-prebuilt
+RUN npm install casperjs
 
 RUN mkdir -p /usr/src/app
 
