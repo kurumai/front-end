@@ -48,7 +48,7 @@ test: test-image
 		--rm                   \
 		-it                    \
 		-v $$PWD:/usr/src/app  \
-		$(IMAGE) /bin/bash -c "node newrelic_setup.js && /usr/local/bin/npm test"
+		$(IMAGE) /usr/local/bin/npm test
 
 # Runs integration tests in Docker
 e2e: test-image

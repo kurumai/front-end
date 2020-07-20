@@ -10,7 +10,7 @@ jobs:
       - run:
           name: set env
           command: |
-            echo "export GROUP=weaveworksdemos" >> $BASH_ENV
+            echo "export GROUP=kurumai" >> $BASH_ENV
             echo "export COMMIT=${CIRCLE_SHA1}" >> $BASH_ENV
             echo "export TAG=${CIRCLE_TAG}" >> $BASH_ENV
             echo "export REPO=front-end" >> $BASH_ENV
@@ -21,7 +21,14 @@ jobs:
             source $BASH_ENV
             make test-image deps
       - run: npm install
-      - run: make test
+      #- run: make test
+
+      - run:
+          name:
+          command: |
+            docker login -u "${DOCKER_USER}" -p "${DOCKER_PASS}";
+            docker build -t ${GROUP}/front-end:${COMMIT}.
+          #  ./scripts/push.sh
 
 workflows:
   test_and_deploy:
