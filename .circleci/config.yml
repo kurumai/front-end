@@ -26,7 +26,7 @@ jobs:
       #- node/install-packages
       - run:
           name: npm install
-          commands: |
+          command: |
             npm install
             npm uninstall newrelic
       - run: make test
