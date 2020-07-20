@@ -23,14 +23,38 @@ jobs:
       - run: npm install
       #- run: make test
 
+  push:
+    machine:
+      docker_layer_caching: true
+      image: ubuntu-1604:201903-01
+    steps:
+      - checkout
       - run:
-          name:
+          name: set env
+          command: |
+            echo "export GROUP=kurumai" >> $BASH_ENV
+            echo "export COMMIT=${CIRCLE_SHA1}" >> $BASH_ENV
+            echo "export TAG=${CIRCLE_TAG}" >> $BASH_ENV
+            echo "export REPO=front-end" >> $BASH_ENV
+            env
+      - run:
+          name: docker build
           command: |
             docker login -u "${DOCKER_USER}" -p "${DOCKER_PASS}";
             docker build -t ${GROUP}/front-end:${COMMIT} .
-          #  ./scripts/push.sh
+      - run: 
+          name: push
+          command: |
+            docker push ${GROUP}/${REPO}:${CIRCLE_TAG}
+            docker push ${GROUP}/${REPO}:latest
 
 workflows:
   test_and_deploy:
     jobs:
       - test
+      - push:
+          filters:
+            branches:
+              only: master
+          requires:
+            - test
