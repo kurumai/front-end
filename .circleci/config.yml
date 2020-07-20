@@ -40,12 +40,17 @@ jobs:
       - run:
           name: docker build
           command: |
-            docker login -u "${DOCKER_USER}" -p "${DOCKER_PASS}";
             docker build -t ${GROUP}/front-end:${COMMIT} .
+      - run:
+          name: docker tag
+          command: |
+            docker tag ${GROUP}/${REPO}:${COMMIT} ${GROUP}/${REPO}:master-${COMMIT:0:8}
+            docker tag ${GROUP}/${REPO}:${COMMIT} ${GROUP}/${REPO}:latest
       - run: 
           name: push
           command: |
-            docker push ${GROUP}/${REPO}:${CIRCLE_TAG}
+            docker login -u "${DOCKER_USER}" -p "${DOCKER_PASS}";
+            docker push ${GROUP}/${REPO}:master-${COMMIT:0:8}
             docker push ${GROUP}/${REPO}:latest
 
 workflows:
