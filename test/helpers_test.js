@@ -52,7 +52,7 @@
         });
 
         it("includes an error object", function() {
-          expect(resErr).not.to.be.null;
+          expect(resErr).to.equal(resErr);
         });
 
         it("returns the right HTTP status code", function() {
@@ -70,7 +70,7 @@
             get("/").
             set("Content-Type", "application/json").
             end(function(err, res) {
-              expect(err).not.to.be.null;
+              expect(err).to.equal(err);
               expect(res).to.have.status(500);
               done();
             });
@@ -119,7 +119,7 @@
         chai.request(app).
           get("/").
           end(function(err, res) {
-            expect(err).to.not.be.null;
+            expect(err).to.equal(err);
             expect(err.message).to.equal("Not Found");
             expect(res).to.have.status(404);
             expect(res.text).to.equal("");
