@@ -24,7 +24,11 @@ jobs:
             source $BASH_ENV
             make test-image deps
       #- node/install-packages
-      - run: npm install
+      - run:
+          name: npm install
+          commands: |
+            npm install
+            npm uninstall newrelic
       - run: make test
 
 workflows:
