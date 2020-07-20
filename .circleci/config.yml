@@ -1,8 +1,5 @@
 version: 2.1
 
-orbs:
-  node: circleci/node@3.0.1
-
 jobs:
   test:
     machine:
@@ -23,12 +20,7 @@ jobs:
           command: |
             source $BASH_ENV
             make test-image deps
-      #- node/install-packages
-      - run:
-          name: npm install
-          command: |
-            npm install
-            npm uninstall newrelic
+      - run: npm install
       - run: make test
 
 workflows:
