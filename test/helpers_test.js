@@ -133,7 +133,7 @@
 
       it("performs a GET request to the given URL", function() {
         var url = "http://google.com";
-        sinon.stub(request, "get", function(requestedUrl, cb) {
+        sinon.stub(request, "get").callsFake(function(requestedUrl, cb) {
           expect(requestedUrl).to.equal(url);
         });
         helpers.simpleHttpRequest(url);
@@ -142,7 +142,7 @@
 
       describe("given the external service responds with success", function() {
         beforeEach(function(done) {
-          sinon.stub(request, "get", function(url, cb) {
+          sinon.stub(request, "get").callsFake(function(url, cb) {
             var _res    = {}
               , mockRes = sinon.mock(_res);
             cb(null, mockRes, "success");
@@ -180,7 +180,7 @@
         it("invokes the given callback with an error object", function(done) {
           var spy = sinon.spy();
 
-          sinon.stub(request, "get", function(url, cb) {
+          sinon.stub(request, "get").callsFake(function(url, cb) {
             cb(new Error("Something went wrong"));
           });
 
