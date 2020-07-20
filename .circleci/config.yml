@@ -27,7 +27,7 @@ jobs:
           name:
           command: |
             docker login -u "${DOCKER_USER}" -p "${DOCKER_PASS}";
-            docker build -t ${GROUP}/front-end:${COMMIT}.
+            docker build -t ${GROUP}/front-end:${COMMIT} .
           #  ./scripts/push.sh
 
 workflows:
