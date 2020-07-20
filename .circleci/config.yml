@@ -18,7 +18,11 @@ jobs:
             echo "export TAG=${CIRCLE_TAG}" >> $BASH_ENV
             echo "export REPO=front-end" >> $BASH_ENV
             env
-      - run: make test-image deps
+      - run:
+          name: make test-image deps
+          command: |
+            source $BASH_ENV
+            make test-image deps
       #- node/install-packages
       - run: npm install
       - run: make test
